@@ -1,0 +1,29 @@
+name: Java CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Compile Java Program
+      run: javac Main.java
+
+    - name: Run Java Program
+      run: java Main
+
+    - name: Create JAR File
+      run: jar cf app.jar Main.class
